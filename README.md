@@ -1,4 +1,4 @@
-SeleniumExample - Using Selenium with C#.NET
+SeleniumExample - Using Selenium with C#.NET - now updated for 2025 .NET and Selenium/
 ===============
 
 This solution demonstrates automated testing web pages with Selenium and C#.NET. It can also be used as a template for new Selenium test projects.
@@ -15,5 +15,3 @@ The tests are structured according to the [Page Object Pattern](https://code.goo
 Out of the box Selenium supports locating elements using the element id or an xpath selector. The extension method *FindElementByJQuery* has been added to SeleniumExample with which elements can be located using a more versatile JQuery selector. Example:
 
     _driver.FindElementByJQuery("input[name='btnSubmit']")
-
-Alexander van Trijffel
