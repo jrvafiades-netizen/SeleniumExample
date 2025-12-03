@@ -1,7 +1,7 @@
 Selenium Example - Using Selenium with C#.NET to test [newbalance.com](https://www.newbalance.com/) with self-healing selectors 
 ===============
 
-Automated testing of New Balance web pages with Selenium and C#.NET. My past experience with C# is limited, so I built this small project to prove I can work with and understand the language. 
+Automated testing of New Balance web pages with Selenium and C#.NET, featuring self-healing selectors with a bespoke implementation based on healenium. An LLM is not integrated, but can be via the SelfHealingDriver Class.
 
 ## Current Tests
 
