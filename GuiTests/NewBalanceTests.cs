@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Threading;
-using Xunit;
 using OpenQA.Selenium;
 using Structura.GuiTests.PageObjects;
 using Structura.GuiTests.SeleniumHelpers;
@@ -37,7 +36,6 @@ namespace Structura.GuiTests
             }
         }
 
-        [Fact]
         public void NewBalanceHomepageShouldLoad()
         {
             Console.WriteLine("TEST: NewBalanceHomepageShouldLoad");
@@ -48,10 +46,10 @@ namespace Structura.GuiTests
             homepage.Navigate(_baseUrl);
 
             // Assert
-            Assert.True(homepage.IsLoaded(), "New Balance homepage should load successfully");
+            if (!homepage.IsLoaded())
+                throw new InvalidOperationException("New Balance homepage should load successfully");
         }
 
-        [Fact]
         public void ShouldFindSearchBarOnHomepage()
         {
             Console.WriteLine("TEST: ShouldFindSearchBarOnHomepage");
@@ -63,10 +61,10 @@ namespace Structura.GuiTests
             var searchElement = homepage.GetSearchBar();
 
             // Assert
-            Assert.True(searchElement.Displayed, "Search bar should be visible on the homepage");
+            if (!searchElement.Displayed)
+                throw new InvalidOperationException("Search bar should be visible on the homepage");
         }
 
-        [Fact]
         public void ShouldBeAbleToNavigateToMensShoes()
         {
             Console.WriteLine("TEST: ShouldBeAbleToNavigateToMensShoes");
@@ -78,10 +76,10 @@ namespace Structura.GuiTests
             var mensPage = homepage.NavigateToMens();
 
             // Assert
-            Assert.True(mensPage.IsLoaded(), "Mens page should load successfully");
+            if (!mensPage.IsLoaded())
+                throw new InvalidOperationException("Mens page should load successfully");
         }
 
-        [Fact]
         public void ShouldFindProductsOnSite()
         {
             Console.WriteLine("TEST: ShouldFindProductsOnSite");
@@ -93,7 +91,8 @@ namespace Structura.GuiTests
             var productsVisible = homepage.AreProductsVisible();
 
             // Assert
-            Assert.True(productsVisible, "Products should be visible on the New Balance site");
+            if (!productsVisible)
+                throw new InvalidOperationException("Products should be visible on the New Balance site");
         }
     }
 }

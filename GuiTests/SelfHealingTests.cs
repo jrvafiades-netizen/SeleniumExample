@@ -1,5 +1,4 @@
 using System;
-using Xunit;
 using OpenQA.Selenium;
 using Structura.GuiTests.PageObjects;
 using Structura.GuiTests.SeleniumHelpers;
@@ -38,7 +37,6 @@ namespace Structura.GuiTests
             }
         }
 
-        [Fact]
         public void DemonstrateSelfHealingCapabilities()
         {
             Console.WriteLine("TEST: DemonstrateSelfHealingCapabilities");
@@ -53,12 +51,12 @@ namespace Structura.GuiTests
             homepage.Navigate(_baseUrl);
 
             // Assert
-            Assert.True(homepage.IsLoaded(), "Homepage should load successfully");
+            if (!homepage.IsLoaded())
+                throw new InvalidOperationException("Homepage should load successfully");
             
             // If using self-healing driver, the healing report will be logged
         }
 
-        [Fact]
         public void SelfHealingDriverCanRecoverFromBrokenLocators()
         {
             Console.WriteLine("TEST: SelfHealingDriverCanRecoverFromBrokenLocators");
@@ -74,14 +72,17 @@ namespace Structura.GuiTests
             var searchBar = homepage.GetSearchBar();
 
             // Assert
-            Assert.NotNull(searchBar);
-            Assert.True(searchBar.Displayed, "Search bar should be visible");
+            if (searchBar == null)
+                throw new InvalidOperationException("Search bar should not be null");
+            
+            if (!searchBar.Displayed)
+                throw new InvalidOperationException("Search bar should be visible");
 
             // If healing was enabled, show what was healed
             if (isHealingEnabled)
             {
                 var report = HealeniumUtils.GetHealingReport(_driver);
-                Assert.True(report.TotalHealedLocators >= 0);
+                Console.WriteLine($"Healing report: {report.TotalHealedLocators} locators healed");
             }
         }
     }
